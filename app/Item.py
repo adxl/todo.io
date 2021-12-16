@@ -31,13 +31,3 @@ class Item():
         if(len(content) > 1000): raise ValueError()
         self.__content = content
         return self
-
-    # created_at
-
-    def get_created_at(self):
-        return self.__created_at
-    
-    def set_created_at(self,created_at:datetime):
-        if not created_at or type(created_at) is not datetime: raise TypeError()
-        self.__created_at = created_at
-        return self

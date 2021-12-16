@@ -10,20 +10,20 @@ class ItemTest(TestCase):
     
     # item name tests
 
-    def test_correct_first_name(self):
+    def test_correct_name(self):
         result = self.item.set_name("Chaussure")
         self.assertIsInstance(result, Item)
 
-    def test_bad_type_first_name(self):
+    def test_bad_type_name(self):
         self.assertRaises(TypeError, self.item.set_name, 1.4)
 
-    def test_empty_string_first_name(self):
+    def test_empty_string_name(self):
         self.assertRaises(TypeError, self.item.set_name, "")
 
-    def test_none_type_first_name(self):
+    def test_none_type_name(self):
         self.assertRaises(TypeError, self.item.set_name, None)
 
-    def test_no_first_name(self):
+    def test_no_name(self):
         self.assertRaises(TypeError, self.item.set_name)
 
     
@@ -46,17 +46,3 @@ class ItemTest(TestCase):
     def test_no_content(self):
         self.assertRaises(TypeError, self.item.set_content)
     
-    # item created_at tests
-
-    def test_correct_created_at(self):
-        result = self.item.set_created_at(datetime.now())
-        self.assertIsInstance(result, Item)
-    
-    def test_bad_type_created_at(self):
-        self.assertRaises(TypeError, self.item.set_created_at, True)
-
-    def test_none_type_created_at(self):
-        self.assertRaises(TypeError, self.item.set_created_at, None)
-
-    def test_no_created_at(self):
-        self.assertRaises(TypeError, self.item.set_created_at)
