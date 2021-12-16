@@ -1,6 +1,7 @@
 from datetime import date, timedelta
 from unittest import TestCase
 
+from app.exceptions import TodoListExistsError, UserNotValidError
 from app.user import User
 
 
@@ -133,3 +134,20 @@ class TestUserValid(TestCase):
         self.user.set_birth_date(d(10))
         result = self.user.is_valid()
         self.assertFalse(result)
+
+
+class TestUserTodoList(TestCase):
+    def setUp(self):
+        self.user = User("John", "Doe", "johndoe@gmail.com", "p4ssw0rd", d(24))
+
+    def test_create_new_list(self):
+        self.user.create_todo_list()
+        self.assertIsNotNone(self.user.todo_list)
+
+    def test_create_list_user_not_valid(self):
+        self.user.set_birth_date(d(5))
+        self.assertRaises(UserNotValidError, self.user.create_todo_list)
+
+    def test_create_list_user_has_list(self):
+        self.user.todo_list = {}
+        self.assertRaises(TodoListExistsError, self.user.create_todo_list)

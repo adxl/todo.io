@@ -1,8 +1,7 @@
 from datetime import date, timedelta
 
 from app.email_validator import EmailValidator as ev
-
-# from app.exceptions import TodoListExistsError
+from app.exceptions import TodoListExistsError, UserNotValidError
 
 
 class User:
@@ -78,8 +77,11 @@ class User:
         )
 
     def create_todo_list(self):
-        pass
-        # if self.todo_list is not None:
-        #     raise TodoListExistsError()
+        if self.todo_list is not None:
+            raise TodoListExistsError()
 
-        # self.todo_list = TodoList()
+        if not self.is_valid():
+            raise UserNotValidError()
+
+        self.todo_list = {}
+        return self.todo_list
