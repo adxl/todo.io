@@ -1,6 +1,5 @@
 from datetime import datetime
 from unittest import TestCase
-import unittest
 from app.Item import Item
 
 class ItemTest(TestCase):
