@@ -18,10 +18,10 @@ class TodoListTest(TestCase):
         result = self.todolist.set_item(item=self.item)
         self.assertIsInstance(result, TodoList)
     
-    def test_invalidate_type_to_add_item(self):
+    def test_invalidate_add_item_is_bad_type(self):
         self.assertRaises(TypeError, self.todolist.set_item, 1.2)
     
-    def test_invalidate_item_is_none_to_add_item(self):
+    def test_invalidate_add_item_is_none(self):
         self.assertRaises(TypeError, self.todolist.set_item, None)
     
     def test_validate_add_item_after_thirty_minutes(self):
