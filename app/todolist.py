@@ -3,13 +3,11 @@ from typing import List
 from app.Item import Item
 
 class TodoList():
-    __items:List[Item]
-    __length:int=0
+    __items:set
     __updated_at:datetime=None
 
     def __init__(self) -> None:
-        self.__items = []
-        self.__length = 0
+        self.__items = set()
 
     # items
 
@@ -23,23 +21,19 @@ class TodoList():
             raise ValueError("Waiting 30 min")
         if self.verify_length() is False:
             raise ValueError("You have reached the limit of items in your list")
-        self.__items.append(item)
-        self.set_length()
+        if item in self.__items:
+            raise ValueError("Item already exists")
+        self.__items.add(item)
         self.set_updated_at(updated_at=datetime.now())
         return self
         
     # length
 
     def get_length(self):
-        return self.__length
-    
-    def set_length(self):
-        self.__length = self.__length + 1
-        return self
+        return len(self.__items)
     
     def verify_length(self):
-        if self.__length == 10: return False
-        return True
+        return len(self.__items) != 10
     
     # updated_at
 

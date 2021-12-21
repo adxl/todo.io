@@ -24,10 +24,15 @@ class TodoListTest(TestCase):
     def test_invalidate_add_item_is_none(self):
         self.assertRaises(TypeError, self.todolist.set_item, None)
     
+    def test_invalidate_add_item_is_duplicate(self):
+        self.todolist.verify_updated_at  = MagicMock(name="verify_updated_at",return_value=True)
+        self.todolist.set_item(item=self.item)
+        self.assertRaises(ValueError,self.todolist.set_item, self.item)
+    
     def test_validate_add_item_after_thirty_minutes(self):
         self.todolist.verify_updated_at  = MagicMock(name="verify_updated_at",return_value=True)
-        result = self.todolist.set_item(item=self.item)
-        self.assertIsInstance(result, TodoList)
+        self.todolist.set_item(item=self.item)
+        self.assertEqual(self.todolist.get_length(),1)
 
     def test_invalidate_add_item_before_thirty_minutes(self):
         self.todolist.verify_updated_at  = MagicMock(name="verify_updated_at",return_value=False)
