@@ -3,6 +3,8 @@ from datetime import date, timedelta
 from app.email_validator import EmailValidator as ev
 from app.exceptions import TodoListExistsError, UserNotValidError
 
+from app.todolist import TodoList
+
 
 class User:
     def __init__(self, fname, lname, email, password, bdate):
@@ -83,5 +85,6 @@ class User:
         if not self.is_valid():
             raise UserNotValidError()
 
-        self.todo_list = {}
+        self.todo_list = TodoList(self.__email)
+
         return self.todo_list
