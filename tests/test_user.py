@@ -1,13 +1,11 @@
-from datetime import date, timedelta
+from datetime import date
 from unittest import TestCase
 
 from app.exceptions import TodoListExistsError, UserNotValidError
 from app.user import User
 
 
-def d(age=0) -> date:
-    """date factory"""
-    return date.today() - timedelta(age * 365)
+from tests.conf import date_factory as d
 
 
 class TestUserValid(TestCase):

@@ -1,13 +1,19 @@
-from datetime import date, datetime,timedelta
-from typing import List
+from datetime import datetime, timedelta
+
+from app.email_sender import EmailSender as es
 from app.Item import Item
 
-class TodoList():
-    __items:set
-    __updated_at:datetime=None
 
-    def __init__(self) -> None:
+class TodoList:
+    def __init__(self, owner) -> None:
+        self.__owner = owner
         self.__items = set()
+        self.__updated_at = datetime.now() - timedelta(minutes=30)
+
+    # owner
+
+    def get_owner(self):
+        return self.__owner
 
     # items
 
@@ -19,12 +25,19 @@ class TodoList():
             raise TypeError()
         if self.verify_updated_at() is False:
             raise ValueError("Waiting 30 min")
+        
         if self.verify_length() is False:
             raise ValueError("You have reached the limit of items in your list")
-        if item in self.__items:
+
+        if any(_item for _item in self.__items if item.get_name() == _item.get_name()):
             raise ValueError("Item already exists")
+
         self.__items.add(item)
         self.set_updated_at(updated_at=datetime.now())
+
+        if self.get_length() == 8:
+            es.send(self.__owner)
+
         return self
         
     # length
@@ -47,6 +60,4 @@ class TodoList():
         return self
     
     def verify_updated_at(self):
-        if(self.__updated_at is None): return True
-        if((datetime.now() - timedelta(minutes = 30)) > self.__updated_at): return True
-        return False
+        return datetime.now() - timedelta(minutes=30) > self.__updated_at
