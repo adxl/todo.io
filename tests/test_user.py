@@ -3,8 +3,6 @@ from unittest import TestCase
 
 from app.exceptions import TodoListExistsError, UserNotValidError
 from app.user import User
-
-
 from tests.conf import date_factory as d
 
 

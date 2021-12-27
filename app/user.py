@@ -2,7 +2,6 @@ from datetime import date, timedelta
 
 from app.email_validator import EmailValidator as ev
 from app.exceptions import TodoListExistsError, UserNotValidError
-
 from app.todolist import TodoList
 
 
@@ -16,8 +15,6 @@ class User:
 
         self.todo_list = None
 
-    # first name
-
     def set_first_name(self, fname):
         if not fname or type(fname) is not str:
             raise TypeError()
@@ -26,8 +23,6 @@ class User:
 
     def get_first_name(self):
         return self.__fname
-
-    # last name
 
     def set_last_name(self, lname):
         if not lname or type(lname) is not str:
@@ -38,8 +33,6 @@ class User:
     def get_last_name(self):
         return self.__lname
 
-    # email
-
     def set_email(self, email):
         if not email or type(email) is not str:
             raise TypeError()
@@ -49,8 +42,6 @@ class User:
     def get_email(self):
         return self.__email
 
-    # password
-
     def set_password(self, password):
         if not password or type(password) is not str:
             raise TypeError()
@@ -59,8 +50,6 @@ class User:
 
     def get_password(self):
         return self.__password
-
-    # date of birth
 
     def set_birth_date(self, bdate):
         if not bdate or type(bdate) is not date:
