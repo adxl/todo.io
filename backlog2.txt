@@ -1,0 +1,17 @@
+TodoList:
+    - items: set[Item]
+    - __length: [0:10]
+    - updated_at
+
+    - add(Item): updated_at > 30min
+
+Item:
+    - name: str
+    - content: [0:1000]
+    - created_at: datetime
+
+______________________________________________
+
+
+- créer classe TodoList
+- créer classe Item

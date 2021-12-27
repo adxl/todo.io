@@ -1,0 +1,48 @@
+CLASSE:
+
+User:
+    - #username : str
+    - first_name : str
+    - last_name : str 
+    - email : email
+    - bdate : >13
+    - password : str[8:40]
+
+    - is_valid()
+
+    - todo_list : TodoList
+
+    - create_todolist()
+
+
+EmailSenderService:
+    - raise error
+
+______________________________________________
+
+
+- créer classe User
+- créer classe EmailSenderService
+
+TESTS :
+
+- [S] USER : is valid                                     
+- [F] USER : create_todolist() : not valid              
+- [S] USER : create_todolist() : user doesn't have one            
+- [F] USER : create_todolist() : user already have one              
+
+- [S] TODOLIST : add(Item) : list len = 0               
+- [F] TODOLIST : add(Item) : list len = 10              
+- [S + mock] TODOLIST : add(Item) : list len = 7               
+
+- [F] TODOLIST : add(Item) : before 30 min              
+- [S] TODOLIST : add(Item) : after 30 min               
+
+- [F] TODOLIST : add() : no item                
+- [S] TODOLIST : add(Item) : item is Item               
+- [F] TODOLIST : add(Item) : item is not Item               
+
+- [F] ITEM : set_item(*) : no name              
+- [S] ITEM : set_item(*) : name is int              
+- [S] ITEM : set_item(*) : no content               
+- [F] ITEM : set_item(*) : content > 1000               

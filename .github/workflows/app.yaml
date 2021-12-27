@@ -1,0 +1,25 @@
+name: ESGI Todo app
+
+on:
+  push:
+    branches: ["develop", "master"]
+  pull_request:
+    branches: ["develop", "master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup
+        uses: actions/setup-python@v2
+
+        with:
+          python-version: "3.10"
+
+      - name: Tests
+        run: |
+          python -m unittest tests/test_*.py
