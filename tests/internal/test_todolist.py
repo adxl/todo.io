@@ -5,7 +5,7 @@ from unittest.mock import MagicMock
 from app.Item import Item
 from app.todolist import TodoList
 from app.user import User
-from tests.conf import date_factory as d
+from .conf import date_factory as d
 
 
 class TodoListTest(TestCase):
